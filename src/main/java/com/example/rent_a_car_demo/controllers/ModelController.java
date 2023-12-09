@@ -5,6 +5,7 @@ import com.example.rent_a_car_demo.dtos.requests.updateRequests.UpdateModelReque
 import com.example.rent_a_car_demo.dtos.responses.getListResponses.GetModelListResponse;
 import com.example.rent_a_car_demo.dtos.responses.getResponses.GetModelResponse;
 import com.example.rent_a_car_demo.services.abstracts.ModelService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class ModelController {
     return this.modelService.getModelResponse(id);
     }
     @PostMapping("/create")
-        public String createModel(@RequestBody AddModelRequest model) {
+    public String createModel(@RequestBody @Valid AddModelRequest model) throws Exception {
 
         return this.modelService.createModel(model);
     }

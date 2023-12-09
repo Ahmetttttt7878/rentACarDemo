@@ -12,7 +12,7 @@ public interface EmployeeService {
     GetEmployeeResponse getEmployeeById(Integer id);
 
     String createEmployee (AddEmployeeRequest addEmployeeRequest);
-    String updateEmployee(UpdateEmployeeRequest updateEmployeeRequest);
+    String updateEmployee(UpdateEmployeeRequest updateEmployeeRequest) throws Exception;
     String deleteByEmployee(int id) throws Exception;
 
     List<GetEmployeeResponse>findByPhone(String phone);

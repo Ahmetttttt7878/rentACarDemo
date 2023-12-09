@@ -40,6 +40,8 @@ public class CarTypeManager implements CarTypeService {
     }
 
     public String saveCarType(AddCarTypeRequest addCarTypeRequest) {
+
+
         CarType carType = new CarType();
         carType.setName(addCarTypeRequest.getName());
         carTypeRepository.save(carType);
@@ -48,7 +50,7 @@ public class CarTypeManager implements CarTypeService {
     }
 
     public String updateCarType(UpdateCarTypeRequest updateCarTypeRequest) throws Exception {
-        CarType upToCarType = carTypeRepository.findById(updateCarTypeRequest.getId()).orElseThrow(() -> new Exception("CarType not found!"));
+        CarType upToCarType = carTypeRepository.findById(updateCarTypeRequest.getId()).orElseThrow(() -> new Exception("Araç tipi bulunamadı"));
 
         upToCarType.setName(updateCarTypeRequest.getName());
         this.carTypeRepository.save(upToCarType);
@@ -56,8 +58,7 @@ public class CarTypeManager implements CarTypeService {
     }
 
     public String deleteCarType(Integer id) throws Exception {
-        this.carTypeRepository.findById(id).orElseThrow(() -> new Exception("CarType not found!"));
-
+        this.carTypeRepository.findById(id).orElseThrow(() -> new Exception("Araçtipi bulunamadı!"));
         this.carTypeRepository.deleteById(id);
         return "Delete Successful!";
     }

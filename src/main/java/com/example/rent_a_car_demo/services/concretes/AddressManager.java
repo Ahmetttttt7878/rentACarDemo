@@ -5,6 +5,7 @@ import com.example.rent_a_car_demo.dtos.requests.updateRequests.UpdateAddressReq
 import com.example.rent_a_car_demo.dtos.responses.getListResponses.GetAddressListResponse;
 import com.example.rent_a_car_demo.dtos.responses.getResponses.GetAddressResponse;
 import com.example.rent_a_car_demo.models.Address;
+import com.example.rent_a_car_demo.models.Car;
 import com.example.rent_a_car_demo.repositories.AddressRepository;
 import com.example.rent_a_car_demo.services.abstracts.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressManager implements AddressService {
@@ -65,7 +67,10 @@ public class AddressManager implements AddressService {
 
     }
 
-    public void saveAddress(AddAddressRequest address) {
+    public void saveAddress(AddAddressRequest address) throws Exception {
+        if (addressRepository.existsByAddress(address.getAddress())) {
+            throw new RuntimeException ("Bu adress zaten kullanımda.");
+        }
 
         Address createAddress = new Address();
 

@@ -7,6 +7,7 @@ import com.example.rent_a_car_demo.dtos.responses.getResponses.GetModelResponse;
 import com.example.rent_a_car_demo.models.Model;
 import com.example.rent_a_car_demo.repositories.ModelRepository;
 import com.example.rent_a_car_demo.services.abstracts.ModelService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,11 @@ public class ModelManager implements ModelService {
         response.setBrandName(model1.getBrand().getName());
         return response;
     }
-    public String createModel(AddModelRequest request) {
+    public String createModel(AddModelRequest request){
+        if (modelRepository.existsByName(request.getName().trim())) {
+            throw  new RuntimeException("Aynı isimle iki model girilemez");
+        }
+
         Model model = new Model();
         model.setName(request.getName());
         model.setEnginePower(request.getEnginePower());

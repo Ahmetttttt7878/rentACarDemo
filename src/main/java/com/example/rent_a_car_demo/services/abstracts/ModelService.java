@@ -10,7 +10,7 @@ import java.util.List;
 public interface ModelService {
     List<GetModelListResponse> getModelList();
     GetModelResponse getModelResponse(int id) throws Exception;
-    String createModel(AddModelRequest request);
+    String createModel(AddModelRequest request) throws Exception;
     String updateModel(int id, UpdateModelRequest request) throws Exception;
     String deleteByModel(int id) throws Exception;
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface AddressService {
     List<GetAddressListResponse> getAllAddresses();
     GetAddressResponse getAddressById(int id);
-    void saveAddress(AddAddressRequest request);
+    void saveAddress(AddAddressRequest request) throws Exception;
     void updateAddress(int id, UpdateAddressRequest address);
     void deleteAddress(int id);
 

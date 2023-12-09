@@ -5,6 +5,7 @@ import com.example.rent_a_car_demo.dtos.requests.updateRequests.UpdateUserReques
 import com.example.rent_a_car_demo.dtos.responses.getListResponses.GetUserListResponse;
 import com.example.rent_a_car_demo.dtos.responses.getResponses.GetUserResponse;
 import com.example.rent_a_car_demo.services.concretes.UserManager;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class UsersController {
 
 
     @PostMapping("/add")
-    public String saveUser(@RequestBody AddUserRequest user) {
+    public String saveUser(@RequestBody @Valid AddUserRequest user) {
 
 
         return userManager.saveUser(user);

@@ -5,6 +5,7 @@ import com.example.rent_a_car_demo.dtos.requests.updateRequests.UpdateEmployeeRe
 import com.example.rent_a_car_demo.dtos.responses.getListResponses.GetEmployeeListResponse;
 import com.example.rent_a_car_demo.dtos.responses.getResponses.GetEmployeeResponse;
 import com.example.rent_a_car_demo.services.abstracts.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class EmployeeController {
     public GetEmployeeResponse getEmployeeById(@PathVariable int id){
         return this.employeeService.getEmployeeById(id);}
     @PostMapping("/create")
-    public String createEmployee(@RequestBody AddEmployeeRequest addEmployeeRequest){
+    public String createEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) throws Exception {
         return this.employeeService.createEmployee(addEmployeeRequest);
     }
     @PutMapping("/update")

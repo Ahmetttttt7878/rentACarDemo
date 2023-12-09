@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
+    boolean existsByEmail (String email);
     List<Employee> findByPhone(String phone);
 
     List<Employee> findByGender(String gender);

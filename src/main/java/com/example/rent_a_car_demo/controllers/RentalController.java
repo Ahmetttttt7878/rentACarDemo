@@ -5,6 +5,7 @@ import com.example.rent_a_car_demo.dtos.requests.updateRequests.UpdateRentalRequ
 import com.example.rent_a_car_demo.dtos.responses.getListResponses.GetRentalListResponse;
 import com.example.rent_a_car_demo.dtos.responses.getResponses.GetRentalResponse;
 import com.example.rent_a_car_demo.services.abstracts.RentalService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +26,10 @@ public class RentalController {
         return this.rentalService.getRentalById(id);
     }
     @PostMapping("/create")
-    public String createRental(@RequestBody AddRentalRequest addRentalRequest){
+    public String createRental(@RequestBody @Valid AddRentalRequest addRentalRequest){
         return this.rentalService.createRental(addRentalRequest);}
     @PutMapping("/update")
-    public String updateRental(@RequestBody UpdateRentalRequest updateRentalRequest) throws Exception {
+    public String updateRental(@RequestBody UpdateRentalRequest updateRentalRequest){
         return this.rentalService.updateRental(updateRentalRequest);
     }
     @DeleteMapping("/delete/{id}")

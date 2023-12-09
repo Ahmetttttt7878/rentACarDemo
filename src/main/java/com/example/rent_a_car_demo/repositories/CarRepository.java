@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface CarRepository extends JpaRepository<Car, Integer> {
+    boolean existsByLicencePlate (String licencePlate);
 List<Car>findByYearGreaterThan (Integer year);
 List<Car>findByYearLessThan (Integer year);
 @Query("SELECT new com.example.rent_a_car_demo.dtos.responses.getResponses.GetCarResponse" +

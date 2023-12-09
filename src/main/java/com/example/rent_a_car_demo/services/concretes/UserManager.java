@@ -90,6 +90,11 @@ public class UserManager implements UserService {
     }
 
     public String saveUser(AddUserRequest user) {
+        if (userRepository.existsByPhone(user.getPhone().trim())) {
+            throw  new RuntimeException("Aynı telefon iki kere  girilemez");
+        }
+
+
         User createdUser = new User();
         createdUser.setFirstName(user.getFirstName());
         createdUser.setLastName(user.getLastName());

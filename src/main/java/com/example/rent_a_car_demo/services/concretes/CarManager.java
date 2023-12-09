@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class CarManager implements CarService {
@@ -44,6 +46,12 @@ public class CarManager implements CarService {
     }
 
     public String saveCar(AddCarRequest addCarRequest) {
+        if (carRepository.existsByLicencePlate(addCarRequest.getLicencePlate())) {
+            throw new RuntimeException ("Bu  plaka zaten kullanımda.");
+        }
+
+
+
         Car car = new Car();
         car.setColor(addCarRequest.getColor());
         car.setYear(addCarRequest.getYear());

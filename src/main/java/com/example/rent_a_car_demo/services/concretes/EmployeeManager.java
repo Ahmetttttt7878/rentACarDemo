@@ -47,6 +47,11 @@ public class EmployeeManager implements EmployeeService {
         }
         @Override
         public String createEmployee (AddEmployeeRequest addEmployeeRequest){{
+            if (employeeRepository.existsByEmail(addEmployeeRequest.getEmail().trim())) {
+                throw  new RuntimeException("Aynı isimle iki email girilemez");
+            }
+
+
                 Employee employee = new Employee();
                 employee.setFirstName(addEmployeeRequest.getFirstName());
                 employee.setLastName(addEmployeeRequest.getLastName());
@@ -64,8 +69,8 @@ public class EmployeeManager implements EmployeeService {
         }
 
     @Override
-    public String updateEmployee(UpdateEmployeeRequest updateEmployeeRequest) {
-        Employee employee = employeeRepository.findById(updateEmployeeRequest.getId()).orElseThrow();
+    public String updateEmployee(UpdateEmployeeRequest updateEmployeeRequest) throws Exception {
+        Employee employee = employeeRepository.findById(updateEmployeeRequest.getId()).orElseThrow(() -> new Exception("Kullanıcı bulunamadı"));
 
         employee.setFirstName(updateEmployeeRequest.getFirstName());
         employee.setLastName(updateEmployeeRequest.getLastName());
@@ -79,7 +84,7 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public String deleteByEmployee(int id) throws Exception {
-        this.employeeRepository.findById(id).orElseThrow();
+        this.employeeRepository.findById(id).orElseThrow(() -> new Exception("Kullanıcı bulunamadı"));
         this.employeeRepository.deleteById(id);
         return "Deletion successful";
     }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
+    boolean existsByPhone(String phone);
     List<User>findByUsername(String username);
 
     List<User>findByFirstNameOrLastName(String firstName, String lastName);
